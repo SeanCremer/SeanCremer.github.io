@@ -1,4 +1,4 @@
-# Sean Cremer      [HOME](README.md)
+# Sean Cremer                            [HOME](README.md)
 
 Born in 1972 I have had the privilege of being part of the expansive changes that have taken place within the IT industry over the last 3 decades. Going through the transitions from Mainframe to PC. Working with a wide range of database products in completely different architectures.  Originally I started with ISAM and HSAM files, then DB2, Oracle, Informix and finally getting a taste of SQL server soon after Microsoft purchased it.
 
@@ -6,7 +6,7 @@ I have been working with Microsoft SQL Server now for more than two decades, mos
 
 Presenting at SQL Saturdays has allowed me to grow a network of professional contacts in all aspects of Microsoft SQL Server that I draw on for my solutions. Attendees at these events have finally convinced me to blog about my experiences.  So here we are!!!  
 
-![The Author]()SQLSaturday.jpg)
+![The Author](https://github.com/SeanCremer/SeanCremer.github.io/SQLSaturday.jpg)
  
  [HOME](README.md)
  
