@@ -1,3 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>Example</title>
+    <script src="document.min.js" userjs="user.js" icon="favicon.ico" id="DOC" onerror="var l=document.createElement('link'),s=document.createElement('script');l.rel='stylesheet';l.href='http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css';l.id='bootstrap.css';l.auto='1';document.head.insertBefore(l,document.getElementById('DOC'));s.src='http://aplib.github.io/document.min.js';document.head.appendChild(s);"></script>
+</head>
+<body>
+
+<!--fixed-top-bar
+[navbar]
+* [Home](index.html)
+* [Page1](page1.html)
+* [Page2](page1.html)
+[/navbar]
+-->
+
+<!--header-panel
+# Insert header here
+site description
+-->
+
+<!--content-panel
+# content text
+## content text
+### content text
+#### content text
+-->
+
+<!--footer-panel
+footer here
+-->
+
+<noscript><div class="alert alert-warning">This Website requires your browser to be JavaScript enabled.</div></noscript>
+</body>
+</html>
+
+
 # Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/SeanCremer/SeanCremer.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
@@ -6,13 +44,16 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 ### Markdown
 
+
 # Table of contents
 1. [Introduction](#introduction)
 2. [Some paragraph](#paragraph1)
     1. [Sub paragraph](#subparagraph1)
 3. [Another paragraph](#paragraph2)
 
-## This is the introduction <a name="introduction"></a>
+<a name="introduction"></a>
+
+## This is the introduction 
 Some introduction text, formatted in heading 2 style
 
 ## Some paragraph <a name="paragraph1"></a>
