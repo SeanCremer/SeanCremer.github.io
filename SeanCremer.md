@@ -6,5 +6,5 @@ I have been working with Microsoft SQL Server now for more than two decades, mos
 
 Presenting at SQL Saturdays has allowed me to grow a network of professional contacts in all aspects of Microsoft SQL Server that I draw on for my solutions. Attendees at these events have finally convinced me to blog about my experiences.  So here we are!!!  
 
-![The Author] (SQLSaturday.jpg)
+![The Author] (https://github.com/SeanCremer/SeanCremer.github.io/SQLSaturday.jpg)
  
