@@ -1,4 +1,4 @@
-# [HOME](README.md)
+## [HOME](README.md)
 
 # Sean Cremer                            
 
@@ -10,5 +10,5 @@ Presenting at SQL Saturdays has allowed me to grow a network of professional con
 
 ![The Author](https://SeanCremer.github.io/SQLSaturday.jpg)
  
-[HOME](README.md)
+### [HOME](README.md)
  
