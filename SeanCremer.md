@@ -1,5 +1,3 @@
-## [HOME](README.md)
-
 # Sean Cremer                            
 
 Born in 1972 I have had the privilege of being part of the expansive changes that have taken place within the IT industry over the last 3 decades. Going through the transitions from Mainframe to PC. Working with a wide range of database products in completely different architectures.  Originally I started with ISAM and HSAM files, then DB2, Oracle, Informix and finally getting a taste of SQL server soon after Microsoft purchased it.
@@ -10,5 +8,4 @@ Presenting at SQL Saturdays has allowed me to grow a network of professional con
 
 ![The Author](https://SeanCremer.github.io/SQLSaturday.jpg)
  
-### [HOME](README.md)
  
