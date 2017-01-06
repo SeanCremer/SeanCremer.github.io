@@ -113,7 +113,7 @@ A table is considered to be Third Normal Form when:
 
 <a name="bcnf"></a>
 
-### Boyce-Codd Normal Form (BCNF)3,5
+### Boyce-Codd Normal Form (BCNF)3.5
 
 A database table is in BCNF if and only if there are no non-trivial functional dependencies of attributes on anything other than a superset of a candidate key.
 
@@ -139,10 +139,10 @@ A table is considered to be in Fifth Normal Form when:
 
 ### Removing Data Redundancy
 
-![The Author](https://SeanCremer.github.io/RemovingRedundancy/Pic1.jpg)
-![The Author](https://SeanCremer.github.io/RemovingRedundancy/Pic2.jpg)
-![The Author](https://SeanCremer.github.io/RemovingRedundancy/Pic3.jpg)
-![The Author](https://SeanCremer.github.io/RemovingRedundancy/Pic4.jpg)
+![Example1](https://SeanCremer.github.io/RemovingRedundancy/Pic1.jpg)
+![Example2](https://SeanCremer.github.io/RemovingRedundancy/Pic2.jpg)
+![Example3](https://SeanCremer.github.io/RemovingRedundancy/Pic3.jpg)
+![Example4](https://SeanCremer.github.io/RemovingRedundancy/Pic4.jpg)
 
 <a name="denormilization"></a>
 
