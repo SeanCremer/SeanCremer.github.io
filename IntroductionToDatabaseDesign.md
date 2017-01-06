@@ -2,13 +2,13 @@
 
 
 # Table of contents
-1. [<h2>Introduction</h2>](#introduction)
-    a. [Overview](#overview)
-    b. [Scope](#scope)
-    c. [Target Audience](#targetaudience)
-2. [Some paragraph](#paragraph1)
-    1. [Sub paragraph](#subparagraph1)
-3. [Another paragraph](#paragraph2)
+1. [Introduction](#introduction)
+   1. [Overview](#overview)
+   2. [Scope](#scope)
+   3. [Target Audience](#targetaudience)
+2. [Fundamental Terminology](#terminology)
+    1. [General Terminology](#generalterminology)
+
 
 <a name="introduction"></a>
 # Introduction
