@@ -216,7 +216,7 @@ Without fail the use of integer fields produce the fastest performing live produ
 
 ### Foreign Keys
 
-Are the migrated Attributes/Columns from another Entity’s Primary Key.  They are the fundamental building blocks within a Relational Database Design.  They can be both defining to an Entity or merely an attribute.
+Are the migrated Attributes/Columns from another Entitys Primary Key.  They are the fundamental building blocks within a Relational Database Design.  They can be both defining to an Entity or merely an attribute.
 
 ### Domains
 
