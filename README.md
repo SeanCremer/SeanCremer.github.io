@@ -1,10 +1,3 @@
-# Welcome to MSSQL Playpen
-
-As the name suggests, MSSQL Playpen is a place to present concepts and ideas around working with Microsoft SQL Server in a fun way.  Some topics covered will be extremely complex while others very introductory.  Most of the topics covered will be realted to my experiences over the years and hopefully some of them will be usefull to others.
-
-That being said thre is no reason why we will not include anything of interest on the IT front.  Sugestions for topics can be sent to <SeanACremer@Gmail.com>
-
-
 ## Introduction to Database Design
 Far too few database developers in this day and age get the opportunity to learn how to design relation databases.  In most cases, they will on occasion be asked to add a few objects to an existing system while following the standards of the organisation.  Often these standards are suspect at best and are merely followed for conformity, convenience and to avoid making waves. 
 

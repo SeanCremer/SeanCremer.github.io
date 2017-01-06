@@ -4,7 +4,7 @@ Born in 1972 I have had the privilege of being part of the expansive changes tha
 
 I have been working with Microsoft SQL Server now for more than two decades, mostly for large retailers and in on-line gaming.  Covering the full spectrum of OLTP, right the way through to BI in extremely  transactional and critical environments. I have had to overcome many technical challenges that allowed me to work with some extremely knowledgeable people within the SQL and Microsoft community.
 
-Presenting at SQL Saturdays has allowed me to grow a network of professional contacts in all aspects of Microsoft SQL Server that I draw on for my solutions. Attendees at these events have finally convinced me to blog about my experiences.  So here we are!!!  
+Presenting at SQL Saturdays has allowed me to grow a network of professional contacts in all aspects of Microsoft SQL Server that I draw on for my solutions. Attendees at these events have finally convinced me to blog about my experiences.  So here we are!!!  Suggestions for topics or comments can be sent to <SeanACremer@Gmail.com>
 
 ![The Author](https://SeanCremer.github.io/SQLSaturday.jpg)
  
