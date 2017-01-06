@@ -46,11 +46,6 @@ A myriad of people will be able to benefit from understanding the principals of 
 3. Testers who wish to be able to provide useful feedback as to potential design flaws by understanding future caveats of new designs.
 4. Support personnel who are interested in being able to interpret and understand the implications of what they are seeing from a design perspective.
 
-<a name="terminology"></a>
+#Fundamental Terminology
 
-# Fundamental Terminology
-
-Most of the complex definitions in this section need not be learnt or understood 100% for good basic database designs to be made.  Knowing them and understanding them do allow for being able to interpret and comprehend the more advanced concepts in books and published papers on database design.  So for the more serious participant in this course, it would definitely be beneficial to spend a bit more time learning these concepts inside out!
-
-<a name="generalterminology"></a>
-
+##General Terminology
