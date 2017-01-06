@@ -18,5 +18,9 @@ This state of being is why it is even more important that the average DB develop
 
 [Read More...](IntroductionToDatabaseDesign.md)
 
+## Disclaimer
+This is my personal blog. The views expressed on these pages are mine alone and not those of my employer.
+
+© 2017. All rights reserved.
 
 
