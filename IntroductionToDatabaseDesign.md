@@ -9,15 +9,6 @@
 2. [Fundamental Terminology](#terminology)
     1. [-General Terminology](#generalterminology)
 
-3. [Database Normalization](#normalization)
-	1. [-First Normal Form](#1stnf)
-	2. [-Second Normal Form](#2ndnf)
-	3. [-Third Normal Form](#3rdnf)
-	4. [-BOYCE-CODD Normal Form (BCNF) 3.5](#bcnf)
-	5. [-Fourth Normal Form](#4thnf)
-	6. [-Fifth Normal Form](#5thnf)
-	7. [-Removing Data Redundancy](#removingrdundancy)
-	8. [-De-Normalization](#denormilization)
 
 <a name="introduction"></a>
 
@@ -51,10 +42,10 @@ I however, will attempt to convey the principals and necessary questions that sh
 
 A myriad of people will be able to benefit from understanding the principals of design that will be presented.
 
-1.	Naturally the benefit to people already responsible for design considerations at a database level will leverage the most from the course.
-2.	Client developers who want to have a look at the Dark side and see how the other side has to live and why they are often asked to do something completely daft and foreign.
-3.	Testers who wish to be able to provide useful feedback as to potential design flaws by understanding future caveats of new designs.
-4.	Support personnel who are interested in being able to interpret and understand the implications of what they are seeing from a design perspective.
+1. Naturally the benefit to people already responsible for design considerations at a database level will leverage the most from the course.
+2. Client developers who want to have a look at the Dark side and see how the other side has to live and why they are often asked to do something completely daft and foreign.
+3. Testers who wish to be able to provide useful feedback as to potential design flaws by understanding future caveats of new designs.
+4. Support personnel who are interested in being able to interpret and understand the implications of what they are seeing from a design perspective.
 
 <a name="terminology"></a>
 
@@ -73,8 +64,6 @@ Most of the complex definitions in this section need not be learnt or understood
 - **Entity** – Loosely defined as a table.  Normally used in the Logical or Conceptual understanding of a Design. Definitions vary as the academics try to one up each other in how smart they are.  For our purposes an Entity is a table for design purposes.  When we define the final schema of the table then we refer to it as a table in its physical form.
 
 - **Row versus Record** – Often used interchangeably but in reality Row refers to the actual data where each column represents a single piece of data, referred to in later publications as a tuple.  A Record on the other hand is usually used to describe the final resting place of the information in a file on Disk. 
-
-<a name="normalization"></a>
 
 
 
