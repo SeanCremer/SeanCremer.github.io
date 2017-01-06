@@ -17,8 +17,10 @@
 	6. [-Fifth Normal Form](#5thnf)
 	7. [-Removing Data Redundancy](#removingrdundancy)
 	8. [-De-Normalization](#denormilization)
+4. [Language of Data modeling](#datamodelling)
+	1. [Unpacking and Entity](#entity)
+    2. [Relationships](#relationships)
      
-
 <a name="introduction"></a>
 
 # Introduction
@@ -170,3 +172,61 @@ De-normalization is a tool for both good and evil.  In most cases it is used to 
 The example below shows a typical parent child relationship between User, BalanceType and UserBalance.  You can also see the de-normalized representation in table UserBalances where the BalanceType parent has been flattened out to create a table storing multiple balances across.  Note that the de-normalized table has a plural name, the only time a plural is ever acceptable for an Entity name.
 
 ![Example1](https://SeanCremer.github.io/DBDesignPics/Denormalisation.jpg)
+
+<a name="datamodelling"></a>
+
+# Language of Data Modelling
+
+Data modeling is where all the magic happens.  It is the single most important tool for database design.  It is the canvass on which your design creativity takes place.  The whiteboard used to come up with the desired outcome.  It becomes your visual representation of what the data flow and relationship between entities are.
+
+There are a variety of different products that allow for database design modeling.  For this training all examples will be done using Microsoft Visio.  When beginning a design there are a variety of different design standards that can be used.  The most prominent and common are:
+
+- UML Database notation
+- Crows Foot Database Notation
+- IDEF1X Database Notation
+
+Each has their own pros and cons when choosing which one to use.  They will all lead to the same design output at the end.  What is important is that you understand the principals of Data Modelling as they are all based on them.  The one you choose is almost always a personal preference after playing with the variations of each.
+
+Each of the various modelling options allows you to define:
+
+- Entities/Tables
+- Attributes/Columns
+- Relationships
+- Descriptive Information
+
+<a name="entity"></a>
+
+## Unpacking an Entity
+
+When designing a Model an Entity is almost always a direct representation of a future table within the database.  It is therefore preferable to ensure that certain standards are followed when defining your entities within your model diagram.
+
+- Entity names should never be Plural. (Unless for some reason you have collapsed data, the plural naming suggests to anyone who knows design that they are immediately looking at intentional de-normalization.)
+- The name should be a very descriptive to what the Entity is modelling.  Always be mindful that an entity should always store only one type of information.  There should be no double meaning to information stored within an Entity.
+- Avoid Hungarian notation.  This is a design for a database.  Prefixes, suffixes and the like should be avoided at all costs.  The Entity Object itself should be hidden from the clients that intend to use it.  They should not know that they are looking at a view or a table when it is all done.  That way client demands do not destroy the essence and intent of a design. (That being said.  Follow the naming convention of your organization, whether right or wrong.)
+
+### Column/Attribtes of an Entity
+
+All columns must be uniquely named.  They need not inherit the prefix of the Entity name.  For example if the entity is Called Product, the Column can merely be called Description rather than ProductDescription as being an Entity with only one type of data the description by association belongs to the Product Entity.
+
+If your design has many Entities with description columns, concessions can be made.  In such situations it is completely acceptable to prefix with the Entity name to avoid confusion.  This should be a last resort as confusion to client developers can be alleviated with parameter naming and different column names in views.
+
+### Pirmary Keys
+
+Every Entity should have a Primary Key without exception.  The primary key can be a Singular column or contain multiple columns.  Initial choice of primary key and name within the model is mostly to ensure correct relationship choices.  More often than not the actual name will become different when you finally create the physical Database scripts themselves.
+
+Without fail the use of integer fields produce the fastest performing live production implementations for primary keys. Avoid dates, Strings as well as GUIDs which normally sparks heated debate, especially if you want a performant system!
+
+### Foreign Keys
+
+Are the migrated Attributes/Columns from another Entity’s Primary Key.  They are the fundamental building blocks within a Relational Database Design.  They can be both defining to an Entity or merely an attribute.
+
+### Domains
+
+Domains as defined before are how we restrict the nature and type of information that can be entered into a specific column or attribute.  It is extremely important to be aware of the intended data volumes when choosing your domain restrictions.  Often a request will be made to store a blob when less than 1% of the data needing to be stored is a Blob.  In these cases it is more performant to provide separate Entitles for the exceptions rather than design specifically for them as a default.
+
+<a name="relationships"></a>
+
+## Relationships
+
+
+
