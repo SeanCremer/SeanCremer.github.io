@@ -8,7 +8,15 @@
     3. [-Target Audience](#targetaudience)
 2. [Fundamental Terminology](#terminology)
     1. [-General Terminology](#generalterminology)
-
+3. [Database Normalization](#normalization)
+	1. [-First Normal Form](#1stnf)
+	2. [-Second Normal Form](#2ndnf)
+	3. [-Third Normal Form](#3rdnf)
+	4. [-BOYCE-CODD Normal Form (BCNF) 3.5](#bcnf)
+	5. [-Fourth Normal Form](#4thnf)
+	6. [-Fifth Normal Form](#5thnf)
+	7. [-Removing Data Redundancy](#removingrdundancy)
+	8. [-De-Normalization](#denormilization)
 
 <a name="introduction"></a>
 
