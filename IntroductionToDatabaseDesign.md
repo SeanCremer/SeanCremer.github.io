@@ -132,7 +132,28 @@ A table is considered to be in Fifth Normal Form when:
 
 ### Removing Data Redundancy
 
+The below Entity is a simple record set of people, their age and the various qualifications they have.
+
 ![Example1](https://SeanCremer.github.io/DBDesignPics/Pic1.jpg)
+
+What is important to notice is that the Education column does not store a single piece of information but a list?  This is by all normal DB design standards a bad Idea.  So naturally we want to remove the list as part of the first step.
+
+Now we have:
+
+![Example1](https://SeanCremer.github.io/DBDesignPics/Pic2.jpg)
+
+This is much better as we no longer store more than 1 piece of information in each column.  It has however produced a rather large amount of repetition of the person and most notably their age.  If this table happened to hold millions of university students over their life span of studying at various linked institutions this repetition of data can result in significant storage implications as well as potential performance hit. 
+
+To start getting around this we need to start breaking out the various pieces of information into their own entities.  How to do this in a more formalized way is discussed later but for now let us keep it simple and just remove the User from the data set and see what we can come up with.
+
+We not only move the User out but any information that is pertinent to the user that we would also only want to store once for the user.  In this example age is a good candidate to be moved into the new User entity.
+
+Now that we have a new entity we create a parent child relationship between the new entity and the information left behind in the old one.  The solution now looks as follows.
+![Example1](https://SeanCremer.github.io/DBDesignPics/Pic3.jpg)
+
+Now we have reduced the unnecessary repetition of the Users information which in most live systems is often a very wide entity with many columns.  Following on with the principal we can also collapse the education column into its own Entity to avoid duplication of large text fields and to improve the overall integrity of data in the system. The end result looks like:
+
+![Example1](https://SeanCremer.github.io/DBDesignPics/Pic4.jpg)
 
 <a name="denormilization"></a>
 
