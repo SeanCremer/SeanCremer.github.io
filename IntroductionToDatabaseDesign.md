@@ -11,6 +11,7 @@
 
 
 <a name="introduction"></a>
+
 # Introduction
 
 <a name="overview"></a>
@@ -28,6 +29,7 @@ If you have built a database that was designed to be a single story building, th
 This state of being is why it is even more important that the average DB developer be more prepared to produce better designs in the very restricted development windows that exist.
 
 <a name="scope"></a>
+
 ### Scope
 
 The purpose of this post is to present the basic introductory understandings and concepts that should be adhered to when designing database objects.  It is unavoidable with the subject matter to not require an understanding of basic key terminology.  That being said the onus is being left on the course attendees to investigate further if knowing the 100% definition of anything is an absolute must in their world.
@@ -35,6 +37,7 @@ The purpose of this post is to present the basic introductory understandings and
 I however, will attempt to convey the principals and necessary questions that should be asked when designing without getting bogged down with too much of the technicalities.  Knowing word for word definitions are not needed for good design if the principals of what is trying to be achieved are understood and followed.  Database design by its very nature is literally a cookie cutter implementation of the same principals over and over.  Follow them and your databases will have a long and sturdy future.
 
 <a name="targetaudience"></a>
+
 ### Target Audience
 
 A myriad of people will be able to benefit from understanding the principals of design that will be presented.
