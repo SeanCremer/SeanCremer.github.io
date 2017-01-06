@@ -17,6 +17,7 @@
 	6. [-Fifth Normal Form](#5thnf)
 	7. [-Removing Data Redundancy](#removingrdundancy)
 	8. [-De-Normalization](#denormilization)
+     
 
 <a name="introduction"></a>
 
@@ -24,7 +25,7 @@
 
 <a name="overview"></a>
 
-### Overview
+## Overview
 
 Far too few database developers in this day and age get the opportunity to learn how to design relation databases.  In most cases, they will on occasion be asked to add a few objects to an existing system while following the standards of the organisation.  Often these standards are suspect at best and are merely followed for conformity, convenience and to avoid making waves. 
 
@@ -38,7 +39,7 @@ This state of being is why it is even more important that the average DB develop
 
 <a name="scope"></a>
 
-### Scope
+## Scope
 
 The purpose of this post is to present the basic introductory understandings and concepts that should be adhered to when designing database objects.  It is unavoidable with the subject matter to not require an understanding of basic key terminology.  That being said the onus is being left on the course attendees to investigate further if knowing the 100% definition of anything is an absolute must in their world.
 
@@ -46,7 +47,7 @@ I however, will attempt to convey the principals and necessary questions that sh
 
 <a name="targetaudience"></a>
 
-### Target Audience
+## Target Audience
 
 A myriad of people will be able to benefit from understanding the principals of design that will be presented.
 
@@ -69,6 +70,7 @@ Most of the complex definitions in this section need not be learnt or understood
 2. **Data Domain** refers to all the values that might be contained in a Data Element.  In laymen terms the range of data that can be stored.  In most cases it is restricted by choosing a Data Type for a Column. 
 3. **Entity** Loosely defined as a table.  Normally used in the Logical or Conceptual understanding of a Design. Definitions vary as the academics try to one up each other in how smart they are.  For our purposes an Entity is a table for design purposes.  When we define the final schema of the table then we refer to it as a table in its physical form.
 4. **Row versus Record** Often used interchangeably but in reality Row refers to the actual data where each column represents a single piece of data, referred to in later publications as a tuple.  A Record on the other hand is usually used to describe the final resting place of the information in a file on Disk.  
+
 # Database Normalization
 
 The whole point of Database Design is to try and eliminate redundant data and to ensure that the eventual design results in the data being store in an efficient and logical way.  How we achieve this is by adhering to the concept of data normalization.  Data Normalization as a topic can have entire books written about them.  The definitions provided below have been simplified to make sense in context of basic design.  Understanding of all aspects of Normalization is not required to implement a good database design.  However knowledge of them will definitely help you in certain cases where the design requirement is out of the norm. It is therefore recommended that you take some time to read up on normalization to be able to better interpret the designs you are looking at as well as future design you might be responsible for.  Knock yourself out if you want to read up more in depth information on this. A deep dive is out of scope for an introduction to database design.
@@ -130,7 +132,7 @@ A table is considered to be in Fifth Normal Form when:
 
 <a name="removingrdundancy"></a>
 
-### Removing Data Redundancy
+## Removing Data Redundancy
 
 The below Entity is a simple record set of people, their age and the various qualifications they have.
 
@@ -157,4 +159,14 @@ Now we have reduced the unnecessary repetition of the Users information which in
 
 <a name="denormilization"></a>
 
-### De-Normalization
+## De-Normalization
+
+De-normalization is a tool for both good and evil.  In most cases it is used to flatten the dataset, removing parent child relationships in favor of wider table definitions.  When applied for the right reasons de-normalization can vastly improve overall performance of heavy transactional systems.
+
+### Simple example for Denormalization
+
+**Requirement: Store multiple balances**
+
+The example below shows a typical parent child relationship between User, BalanceType and UserBalance.  You can also see the de-normalized representation in table UserBalances where the BalanceType parent has been flattened out to create a table storing multiple balances across.  Note that the de-normalized table has a plural name, the only time a plural is ever acceptable for an Entity name.
+
+![Example1](https://SeanCremer.github.io/DBDesignPics/Denormalisation.jpg)
