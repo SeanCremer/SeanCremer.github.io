@@ -139,10 +139,7 @@ A table is considered to be in Fifth Normal Form when:
 
 ### Removing Data Redundancy
 
-![Example1](https://SeanCremer.github.io/RemovingRedundancy/Pic1.jpg)
-![Example2](https://SeanCremer.github.io/RemovingRedundancy/Pic2.jpg)
-![Example3](https://SeanCremer.github.io/RemovingRedundancy/Pic3.jpg)
-![Example4](https://SeanCremer.github.io/RemovingRedundancy/Pic4.jpg)
+![Example1](https://SeanCremer.github.io/Pic1.jpg)
 
 <a name="denormilization"></a>
 
