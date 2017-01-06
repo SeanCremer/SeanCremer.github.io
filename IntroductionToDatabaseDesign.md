@@ -2,18 +2,20 @@
 
 
 # Table of contents
-1. [Introduction](#introduction)
-	1. [Overview](#overview)
-    2. [Scope](#scope)
-    3. [Target Audience](#targetaudience)
+1. [<h2>Introduction</h2>](#introduction)
+    a. [Overview](#overview)
+    b. [Scope](#scope)
+    c. [Target Audience](#targetaudience)
 2. [Some paragraph](#paragraph1)
     1. [Sub paragraph](#subparagraph1)
 3. [Another paragraph](#paragraph2)
 
 <a name="introduction"></a>
-# 1 Introduction
+# Introduction
+
 <a name="overview"></a>
-### 1.i Overview
+
+### Overview
 
 Far too few database developers in this day and age get the opportunity to learn how to design relation databases.  In most cases, they will on occasion be asked to add a few objects to an existing system while following the standards of the organisation.  Often these standards are suspect at best and are merely followed for conformity, convenience and to avoid making waves. 
 
@@ -26,14 +28,14 @@ If you have built a database that was designed to be a single story building, th
 This state of being is why it is even more important that the average DB developer be more prepared to produce better designs in the very restricted development windows that exist.
 
 <a name="scope"></a>
-### 1.ii Scope
+### Scope
 
 The purpose of this post is to present the basic introductory understandings and concepts that should be adhered to when designing database objects.  It is unavoidable with the subject matter to not require an understanding of basic key terminology.  That being said the onus is being left on the course attendees to investigate further if knowing the 100% definition of anything is an absolute must in their world.
 
 I however, will attempt to convey the principals and necessary questions that should be asked when designing without getting bogged down with too much of the technicalities.  Knowing word for word definitions are not needed for good design if the principals of what is trying to be achieved are understood and followed.  Database design by its very nature is literally a cookie cutter implementation of the same principals over and over.  Follow them and your databases will have a long and sturdy future.
 
 <a name="targetaudience"></a>
-## 1.iii Target Audience
+### Target Audience
 
 A myriad of people will be able to benefit from understanding the principals of design that will be presented.
 
