@@ -3,11 +3,11 @@
 
 # Table of contents
 1. [Introduction](#introduction)
-   1. [Overview](#overview)
-   2. [Scope](#scope)
-   3. [Target Audience](#targetaudience)
+	1. [-Overview](#overview)
+    2. [-Scope](#scope)
+    3. [-Target Audience](#targetaudience)
 2. [Fundamental Terminology](#terminology)
-    1. [General Terminology](#generalterminology)
+    1. [-General Terminology](#generalterminology)
 
 
 <a name="introduction"></a>
