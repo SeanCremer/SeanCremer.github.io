@@ -228,5 +228,35 @@ Domains as defined before are how we restrict the nature and type of information
 
 ## Relationships
 
+Relationships are the fundamental points behind all database design.  The relationships between entities allow a developer to interpret correct behavior as the design tells a story of how things are glued together within a system.  If the design does not follow logical design standards and patterns then domain knowledge of the system is required, increasing key personnel dependency.  All relationships are defined by the traditional Parent Child entity relationship fundamentals.
 
+IDEF1X definitions:
+
+- **Entity, Child**: The Entity in a Specific connection relationship whose instances can be related to zero or one instance of the other entity (parent entity).
+
+- **Entity, Parent**: An Entity in a specific connection relationship whose instance can be related to a number of Instances of another entity (child Entity).
+
+- **Relationship**: An association between two entities or between instances of the same entity.
+
+### Identifying Relationship
+
+Identifying relationship is when the primary key of one table is migrated to the primary key of another.  The child will be a dependant Entity.
+
+![Identifyin Relationship](DBDesignPics/IdentifyinRelationship.png)
+
+An identifying relationship defines an entity and essentially means that that entity will have that descriptive attribute for its entire existence.  It is very difficult to change once in production so due consideration and thought needs to be made to determine if it is necessary.
+
+### NonIdentifying RelationShip
+
+Non-identifying relationship is when the primary key of one table is migrated to the non-primary attributes of the other.  The child will be an independent Entity if no other identifying relationship exists.
+
+![Non Identifying Relation Ship](DBDesignPics/NonIdentifyingRelationShip.png)
+
+This is a very common relationship and is often used to ensure that an entity has very descriptive attributes that can be expanded upon and to maintain data integrity of the entity.  Limiting what can be added into the attributes themselves by the restrictive foreign key.
+
+### Optional Identifying
+
+### Recursive (Fishhook)
+
+### Many to Many
 
