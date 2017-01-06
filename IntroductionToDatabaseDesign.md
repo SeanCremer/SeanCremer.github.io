@@ -9,6 +9,8 @@
 2. [Fundamental Terminology](#terminology)
     1. [-General Terminology](#generalterminology)
 
+<a name="terminology"></a>
+<a name="generalterminology"></a>
 
 <a name="introduction"></a>
 
@@ -47,19 +49,21 @@ A myriad of people will be able to benefit from understanding the principals of 
 3.	Testers who wish to be able to provide useful feedback as to potential design flaws by understanding future caveats of new designs.
 4.	Support personnel who are interested in being able to interpret and understand the implications of what they are seeing from a design perspective.
 
+<a name="terminology"></a>
 
+# Fundamental Terminology
 
-## This is the introduction 
-Some introduction text, formatted in heading 2 style
+Most of the complex definitions in this section need not be learnt or understood 100% for good basic database designs to be made.  Knowing them and understanding them do allow for being able to interpret and comprehend the more advanced concepts in books and published papers on database design.  So for the more serious participant in this course, it would definitely be beneficial to spend a bit more time learning these concepts inside out!
 
-## Some paragraph <a name="paragraph1"></a>
-The first paragraph text
+<a name="generalterminology"></a>
 
-## Some paragraph <a name="paragraph1"></a>
-The first paragraph text
+### General Terminology
 
-### Sub paragraph <a name="subparagraph1"></a>
-This is a sub paragraph, formatted in heading 3 style
+•	**Data Element** - is an atomic unit of data that has precise meaning.  (Read up on Metadata for more understanding.  Often implanted in production with overloading which means there is multiple meanings to the single data element which breaks the conceptual understanding of a single precise meaning.  This is an extremely bad practice and now requires domain knowledge to interpret information.
 
-## Another paragraph <a name="paragraph2"></a>
-The second paragraph text
+•	**Data Domain** – refers to all the values that might be contained in a Data Element.  In laymen’s terms the range of data that can be stored.  In most cases it is restricted by choosing a Data Type for a Column.
+
+•	**Entity** – Loosely defined as a table.  Normally used in the Logical or Conceptual understanding of a Design. Definitions vary as the academics try to one up each other in how smart they are.  For our purposes an Entity is a table for design purposes.  When we define the final schema of the table then we refer to it as a table in its physical form.
+
+•	**Row versus Record** – Often used interchangeably but in reality Row refers to the actual data where each column represents a single piece of data, referred to in later publications as a tuple.  A Record on the other hand is usually used to describe the final resting place of the information in a file on Disk. 
+
