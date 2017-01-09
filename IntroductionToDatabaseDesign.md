@@ -171,6 +171,8 @@ De-normalization is a tool for both good and evil.  In most cases it is used to 
 
 The example below shows a typical parent child relationship between User, BalanceType and UserBalance.  You can also see the de-normalized representation in table UserBalances where the BalanceType parent has been flattened out to create a table storing multiple balances across.  Note that the de-normalized table has a plural name, the only time a plural is ever acceptable for an Entity name.
 
+![Example1](https://SeanCremer.github.io/DBDesignPics/Denormalisation.jpg)
+
 <a name="datamodelling"></a>
 
 # Language of Data Modelling
