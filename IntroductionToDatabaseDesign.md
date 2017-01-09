@@ -24,6 +24,7 @@
 	1. [Conceptual Phase](#conceptual)
     2. [Logical](#Logical)
 	3. [Physical Phase](#physical)
+5. [Conclusion](#conclusion)
    
 <a name="introduction"></a>
 
@@ -327,8 +328,125 @@ The Logical Phase is the stage at which the Conceptual phase is refined.  Now yo
 
 It is important to note at this point that good naming conventions should be used to define your growing parent child entity relationships.  The names themselves need only make sense to the database not any potential client that would like to retrieve or work with the entities created.  More details for this will be provided in the Physical Phase.
 
+### Determine Logical Entity Relationships
+
+Trying to figure out what the entity relationships are and whether or not they should be expanded or dropped is achieved by asking the following questions of each and every Entity:
+
+1.	**Do any Entities define the entity?** If the answer is **NO** then the entity concerned is in all likelihood an attribute or at the very least the beginning of an attribute structure.  If the answer is **YES** then the Entity concerned inherits its parent entity’s primary key as part of its own.  It may still be part of an attribute structure or at the very least the final child table which is often a transactional table.
+2.	**Do any entities expand the understanding the entity?**  If the Answer is **NO** then the entity essentially has no foreign keys.  If the answer is **YES** then the entity has an attribute that is not defining, in other words the attribute does not form part of the Primary Key but restricts domain on certain columns by becoming a foreign key.
+3.	**Does the entity require auditing?**  If the answer is **NO**, fabulous this is a rare luxury.  If the answer is **YES** then you will have to add relevant auditing entities if you had not already taken that into account during the Conceptual Phase.  There are many different ways in which auditing can be done, merely choose the one that follows the standards of your organization or introduce one that meets your requirements.  (FYI - Auditing is one of the few scenarios where the use of triggers does not result in heated debate)
+4.	**Does the entity require maintained history?** If the answer is **NO**, then the current entity design will suffice.  If the answer is **YES** then the design needs to take into account that although an attribute might remain the same, its own attributes might change over time so some way of knowing what the attribute meant during a period of time becomes important.  You can think of it along the lines of fast and slow changing dimension if you have knowledge of data warehousing.
+5.	**Does the Entity Require Archiving or Deleting?**  If the answer is **NO**, awesome you are likely to be a basic attribute entity.  If the answer is **YES** then implement according to your company standards or add in a new process to handle accordingly.  Depending on volumes and hotness of the implicated entities this often results in the most creative solutions.
+6.	**Are the values of the entity going to be required downstream in alternative products or platforms?** If the answer is **NO**, sigh of relief.  If the answer is **YES** then the entity might have some additional specific attributes added or stamped with each row to facilitate the rules required for information to be relevant downstream.
+7.	**Does the new relationship make practical sense?** If the answer is **NO**, then why?  Did we end up too deep with our primary keys; is the attribute structure we have just completed too complex?  If so then considerations that involve applying normalization rules need to come into play and we might choose to flatten a structure or change its design to be more practical for implementation.  If the answer is **YES** then all is well, move on to the next entity.
+
+These questions should essentially be asked of every entity that you have previously added as well as any entity that you might have added as a result of the questions.  Once complete you will have a blueprint of all your Entities with their potential respective primary keys and foreign keys.  The task is far from over as you now need to add in the missing columns with information that pertains specifically to each of the defined entities that should exist only in one entity if good design standards  have been followed.
+
+As a general consensus it is always a better idea to design to at least 3rd Normal form before choosing to collapse design and make it more business practical.  The same applies for making a decision to use Boyce & Codd or any of the other more aggressive design consideration as they must make practical and business sense.
+
+### Start Understanding Security Requirements
+
+With any system, security is of utmost importance.  Many organizations already have security policies or processes that need to be followed before implementing any new system.  This is a good time to find out if there are any requirements that will need to be added to the design or taken note of before the Physical Phase implementation.
+
+Engage all relevant parties and pay careful attention to the security features of the chosen technology that will be used for the final implementation.  Any shortfall might need to have an additional level of DB design controlled by the system itself to ensure security is at the level demanded by requirements.
+
+### Confirm Your Design Meets Requirements
+
+In the Get Your Requirements part of the conceptual phase it was suggested you create a checklist of what is specific to the database.  Now is the time to do some sanity checks and confirm that you Logical model is still conforming to the original requirements.  If not then it is important to restart the 7 question checklist in the respective areas to ensure that your design is brought in line with requirements.
+
+ It is prudent to do these checks after completing areas of the design that can be logically grouped together.  The process can be a continuous confirmation of integrity to the original requirements as the database design actually develops; especially if the design is for an extremely large database.
 
 <a name="physical"></a>
 
 ## Physical Phase
+
+When the Logical phase is done and dusted we move on to the physical phase where we turn our design into a physical MSSQL representation.  A basic knowledge of SQL Server is very important in this phase.  The physical entity Design might only show a single entity but if that entity is destined for a Distributed View then it becomes multiple objects during the physical Implementation.  The primary goal is to facilitate the following:
+
+- Choosing a primary key and indexes
+- Deciding on a partitioning Strategy if large data is involved
+- Preparing fundamental data insert update and delete code.
+
+### Deciding on Primary Keys
+
+Choosing primary keys often seems to be a bit of an afterthought in most designs in production.  This is a monumental oversight considering the implications at a performance level that can be introduced by choosing one way over another.
+
+The questions that always seem to arise are:
+
+1.	Do I stay with the deep Primary key that has resulted from My Logical design?
+2.	Do I Make the Deep Key a non-defining foreign key attribute and resolve with an Identity primary key.
+3.	If using an Identity Primary key do I make it clustered or un-clustered?
+4.	If using an identity should I add an additional index on the Foreign Key attributes to improve lookups and data retrieval.
+5.	Should my additional indexes be clustered or non-clustered as they affect what type of Primary key I will use?
+6.	Which version of Primary key allows the fastest version of insert?
+7.	Should I just chuck all of the above away and go with GUIDS?
+
+The below example of a parent child design leads to the child table with a deep Primary Key at the bottom to handle Transactions.  A more modern take is the table directly to the right where the Deep Primary key is replaced with an Identity and the depth of the original Primary key is now an attribute of the entity.  This is a very common implementation by most modern designers.   Neither design is better in all scenarios; each provides different pros and cons that only apply very contextually to the situation.
+
+The same applies when choosing to use a GUID instead of an Identity. It has completely different implications as well.  Decide based on experience which is the option that will best suit your design and requirements.  The consideration often hinges on the data volumes you need to cope with and the Hotness of inserts as well as information retrieval.
+
+![Primary Key](DBDesignPics/PrimaryKey.png)
+
+### Do I need Partition Data
+
+On very large data systems there is essentially no option but to plan for a partitioning strategy and design.  Two choices exist, each with their own pros and cons, supporters and detractors.
+
+#### Partitioned Views
+
+Partitioned view is an old feature of MSSQL.  It does still have many reasons why it is still a viable option for large datasets.   Allows for some out of the box solutions to complicated requirements that normal Table partitioning does not have an answer for.
+
+Pros 
+- Can run across multiple Databases on different Servers.
+- Available on any Edition of SQL Server 
+- Each table has its own better Statistics 
+- Index Rebuilds of any table is an ONLINE operation on Enterprise Edition.
+- Each table can be indexed independently 
+- Operational Data 
+- Historical Data 
+
+Cons 
+- Lots of tables to administer 
+- Indexes must be created on individual tables 
+- Check Constraints are needed for Table Elimination 
+- Gaps and overlapping values are possible 
+
+![Partitioned Views](DBDesignPics/partitionedViews.png)
+
+#### Partitioned Tables
+
+Table partitions are the new buzzword in large data management that is usually hastily implemented to solve problems in bad design.  Switching provides excellent deletion of data for archiving processes.  Also has vastly improved lookups when retrieving data when specifying the partition.  Strangely enough for a relatively new feature within MSSQL there are quite a few cons which will hopefully be resolved in SQL releases to come.  These cons are also what keep Partitioned Views in the mix for design considerations
+
+Pros 
+- Only one table to administer 
+- Gaps and overlapping values are NOT possible 
+- Completely transparent 
+
+Cons 
+- Table-Level Statistics 
+- Less accurate on larger Partitioned Tables 
+- Filtered Statistics can help here… 
+- Partition Level Index Rebuilds are OFFLINE operations 
+- Only the whole Partitioned Table can be rebuild ONLINE 
+- Supports Partitioning only over a single column 
+- Persisted Computed Columns are needed 
+
+![Partitioned Table](DBDesignPics/PartitionedTable.png)
+
+#### Preparing Fundamental Data Management
+
+Once the schema has been completed within the final design it is often prudent, especially when using deep/composite primary keys to provide procedures to do the basic functionality of:
+
+1. **Inserts** – Procedure needs to be created that merely takes parameters for every column within the table, determines any transaction Ids and inserts them.  This must be the only way data ever enters the table.  Any additional criteria or business logic requirements should actually wrap this original very simple insert procedure.
+2. **Update**  – Same as the insert a very simple update procedure needs to be built to ensure the simplest way of updating a value directly targeting the Primary Key via passed in parameters.
+
+These procedures will also handle anything related to audit tracking that was required in the original design.  It is important to then enforce the use of these procedures no matter how many products or clients would like to write to the Entity.  That way we are able to enforce consistency of entity use which makes it vastly easier to deal with performance issues.
+
+<a name="conclusion"></a>
+
+# Conclusion
+
+The responsibility of the Database designer is to produce as best as possible a design that meets current as well as future needs.  The design should almost always be created with the intention of scaling out rather than up. 
+
+It is also the duty of the designer to combat any effort by all factors within an organization to compromise the design and intent of the system and its entities.  A task that based on the nature of organizations is more academic than actually doable. 
+
+
 
