@@ -318,12 +318,12 @@ Try not to apply to much thought as to why an Entity is there; just make sure it
 
 The Logical Phase is the stage at which the Conceptual phase is refined.  Now you can let the creative juices start to flow to interpret and figure out all aspects of the conceptual phase.  It is important to remember that at this stage we do not take into account what technology will be used to implement the system.  In other words do not start building the design for a specific database such as Oracle or MSSQL.  Completing the following rounds out a plan for the final system:
 
--	Drill into the Conceptual Model and expand all Entities.
--	Figure out what Entities are attributes and what Entities need attributes.
--	Follow the rules of normalization.
--	Figure out the primary keys and respective foreign key attributes.
--	Finalize the definition of all relationships.
--	Determine an appropriate domain for each attribute and key. 
+1. Drill into the Conceptual Model and expand all Entities.
+2. Figure out what Entities are attributes and what Entities need attributes.
+3. Follow the rules of normalization.
+4. Figure out the primary keys and respective foreign key attributes.
+5. Finalize the definition of all relationships.
+6. Determine an appropriate domain for each attribute and key. 
 
 It is important to note at this point that good naming conventions should be used to define your growing parent child entity relationships.  The names themselves need only make sense to the database not any potential client that would like to retrieve or work with the entities created.  More details for this will be provided in the Physical Phase.
 
