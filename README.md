@@ -8,7 +8,7 @@ In the world of Business applications the database can be described as the found
 If you have built a database that was designed to be a single story building, there is no way you can build a second story on top of it without ripping out the foundation that has already been laid.  To maintain database performance it is critical to understand that continuous unplanned additions done in an unplanned way jeopardise the future of the product.  It does not take a rocket scientist to know that no matter how awesome the house looks; if the foundation is faulty, trouble is only a few short CPU cycles around the corner.
 
 This state of being is why it is even more important that the average DB developer be more prepared to produce better designs in the very restricted development windows that exist.
-
+ 
 [Read More...](IntroductionToDatabaseDesign.md)
 
 ## Disclaimer
