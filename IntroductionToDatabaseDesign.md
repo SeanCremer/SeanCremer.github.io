@@ -423,7 +423,7 @@ Pros
 Cons 
 - Table-Level Statistics 
 - Less accurate on larger Partitioned Tables 
-- Filtered Statistics can help here… 
+- Filtered Statistics can help here.
 - Partition Level Index Rebuilds are OFFLINE operations 
 - Only the whole Partitioned Table can be rebuild ONLINE 
 - Supports Partitioning only over a single column 
@@ -435,8 +435,8 @@ Cons
 
 Once the schema has been completed within the final design it is often prudent, especially when using deep/composite primary keys to provide procedures to do the basic functionality of:
 
-1. **Inserts** – Procedure needs to be created that merely takes parameters for every column within the table, determines any transaction Ids and inserts them.  This must be the only way data ever enters the table.  Any additional criteria or business logic requirements should actually wrap this original very simple insert procedure.
-2. **Update**  – Same as the insert a very simple update procedure needs to be built to ensure the simplest way of updating a value directly targeting the Primary Key via passed in parameters.
+1. **Insert** Procedures needs to be created that merely takes parameters for every column within the table, determines any transaction Ids and inserts them.  This must be the only way data ever enters the table.  Any additional criteria or business logic requirements should actually wrap this original very simple insert procedure.
+2. **Update** Same as the insert a very simple update procedure needs to be built to ensure the simplest way of updating a value directly targeting the Primary Key via passed in parameters.
 
 These procedures will also handle anything related to audit tracking that was required in the original design.  It is important to then enforce the use of these procedures no matter how many products or clients would like to write to the Entity.  That way we are able to enforce consistency of entity use which makes it vastly easier to deal with performance issues.
 
@@ -448,5 +448,8 @@ The responsibility of the Database designer is to produce as best as possible a 
 
 It is also the duty of the designer to combat any effort by all factors within an organization to compromise the design and intent of the system and its entities.  A task that based on the nature of organizations is more academic than actually doable. 
 
+Below is a simple flow Diagram to help remember the steps:
 
+
+![Partitioned Table](DBDesignPics/DBdesignFlowFlow.jpg)
 
