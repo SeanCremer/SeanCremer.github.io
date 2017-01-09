@@ -278,7 +278,7 @@ Many-to-many are often more of a theoretical scenario which is seldom the end re
 
 # Database Design Sequence
 
-When designing Databases the decisions and steps taken are essentially a continuous circle of rinse and repeat.  Basically a set of cookie cutter operations that must be performed over and over again till the design is complete.  The repetition and Designer’s experience improves decisions made at conceptual crossroads reducing the iterations needed for the final product.
+When designing Databases the decisions and steps taken are essentially a continuous circle of rinse and repeat.  Basically a set of cookie cutter operations that must be performed over and over again till the design is complete.  The repetition and Designers experience improves decisions made at conceptual crossroads reducing the iterations needed for the final product.
 
 <a name="conceptual"></a>
 
