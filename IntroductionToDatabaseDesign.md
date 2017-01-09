@@ -20,7 +20,11 @@
 4. [Language of Data modeling](#datamodelling)
 	1. [Unpacking and Entity](#entity)
     2. [Relationships](#relationships)
-     
+5. [Database Design Sequence](#designsequence)
+	1. [Conceptual Phase](#conceptual)
+    2. [Logical](#Logical)
+	3. [Physical Phase](#physical)
+   
 <a name="introduction"></a>
 
 # Introduction
@@ -256,7 +260,75 @@ This is a very common relationship and is often used to ensure that an entity ha
 
 ### Optional Identifying
 
+Optional Identifying occurs when the non-identifying relationship do not require a child value.  A simple example is a foreign key where the columns are defined as Null able so the attribute does not need to be filled in.
+
 ### Recursive (Fishhook)
 
+Recursive relationship is when a table is related to itself.  In many cases in live production the Patient table will invariably be a parent to two fields in a child table as an alternative design.  This design would normally allow two mappings to eventually exist to resolve either husband and wife or wife and husband.
+
+![Recursive Relationship](DBDesignPics/RecursiveRelationship.png)
+
 ### Many to Many
+
+Many-to-many are often more of a theoretical scenario which is seldom the end result of the final Physical design.  The fact that certain relationships are possible in a sort of Cartesian join does not always translate into a viable scenario in production.  That being said there are scenarios where these relationships do solve very specific business requirements despite being very difficult to resolve for reporting purposes.
+
+![Manyto Many Relationship](DBDesignPics/ManytoManyRelationship.png)
+
+<a name="designsequence"></a>
+
+# Database Design Sequence
+
+When designing Databases the decisions and steps taken are essentially a continuous circle of rinse and repeat.  Basically a set of cookie cutter operations that must be performed over and over again till the design is complete.  The repetition and Designer’s experience improves decisions made at conceptual crossroads reducing the iterations needed for the final product.
+
+<a name="conceptual"></a>
+
+## Conceptual Phase
+
+In this phase the design process begins and all faculties need to be brought to bear on the problem at hand.  Establishing the requirements is the first step to laying the foundation for the whole Database Design.  Patience is needed to ensure that the foundation is not rushed.  This is the one part of life where over analysis of the problem is not a bad thing.  You want everything on the table before beginning to discard and choosing what is relevant.
+
+This makes it extremely important that you find yourself a partner in crime. During any design phase; **Collaboration** is your friend providing the following advantages:
+
+1.	Different minds interpret the same information differently.  Thus ensuring that differing opinions and insights are merged in requirements gathering.
+2.	Experiences of the different designers and architects can shorten design iterations by bringing to the table knowledge of tried and tested alternatives.
+3.	Multiple applied minds can sense check ideas in a more holistic way and reduce the risk of erroneous interpretation of requirements.
+
+### Get the Requirements
+
+This is often the most difficult part; consolidating all the information that pertains to the requirements.  Seldom is it provided in a single document and often requires additional leg work from the designer is required to narrow down the information and gain the necessary clarity within the clutter.
+
+Take the time to understand and find as much as possible about the requirements.  Later in the process a new piece of missed information could change the overall design in a very significant way.  Catching such a caveat up front reduces wasted time and effort.  This is definitely a stage where a little more persistence and patience in determining requirements flattens out the chaotic ups and downs that come from designing systems.
+
+When all the information is achieved break it down into the relevant Entity needs and key points relevant to design implication.  Remove the peripherals that are not relevant to the actual database requirements.  Produce a new list of database specific needs and crosscheck that it will deliver what is needed for the project. This will be used as a sanity check as the design starts to take shape.
+
+### Figure Out the Consumers
+
+The importance of this can never be overstated.  The person or parties that require the new design are often not the only people who would potentially be interested in it and what it has to offer.  Taking into account that other parties might be interested can significantly change the way you look at providing information, the relationships and the grouping thereof.  In many cases it will also expand the nature of the information you choose to include in your design.
+
+New systems often become more important to other departments than the department that originally requested the system.   They tend to gain a life of their own as a different consumer gains more benefit from the system that the team it was originally designed for.
+
+### Prepare Logical Entities
+
+Think of this in the same way as brainstorming; add an entity for every single piece of information you can think of; do not hold back.  Avoid the inner voice that is trying to make rhyme or reason from the specifications and just brain dump everything.  Clarity will be determined in a later phase.  Even if you think it is irrelevant or does not form part of what will eventually be, just add it anyway. 
+
+Try not to apply to much thought as to why an Entity is there; just make sure it is there.  The Entity itself might become multiple objects down the line but in this phase we are only trying to create a place holder for something we know needs to be interrogated in depth.
+
+<a name="Logical"></a>
+
+## Logical Phase
+
+The Logical Phase is the stage at which the Conceptual phase is refined.  Now you can let the creative juices start to flow to interpret and figure out all aspects of the conceptual phase.  It is important to remember that at this stage we do not take into account what technology will be used to implement the system.  In other words do not start building the design for a specific database such as Oracle or MSSQL.  Completing the following rounds out a plan for the final system:
+
+-	Drill into the Conceptual Model and expand all Entities.
+-	Figure out what Entities are attributes and what Entities need attributes.
+-	Follow the rules of normalization.
+-	Figure out the primary keys and respective foreign key attributes.
+-	Finalize the definition of all relationships.
+-	Determine an appropriate domain for each attribute and key. 
+
+It is important to note at this point that good naming conventions should be used to define your growing parent child entity relationships.  The names themselves need only make sense to the database not any potential client that would like to retrieve or work with the entities created.  More details for this will be provided in the Physical Phase.
+
+
+<a name="physical"></a>
+
+## Physical Phase
 
