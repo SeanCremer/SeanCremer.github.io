@@ -1,3 +1,12 @@
+
+## Top Developer Tools for 2016 (2017-01-25)
+
+Nice read to see how the different products are gaining ground while others are loosing.  Good opportunity to highlight a prodcut you never knew about that could be helpfull.
+
+https://stackshare.io/posts/top-developer-tools-2016
+
+Nice one StackShare!
+
 ## Introduction to Database Design (2017-01-09)
 Far too few database developers in this day and age get the opportunity to learn how to design relation databases.  In most cases, they will on occasion be asked to add a few objects to an existing system while following the standards of the organisation.  Often these standards are suspect at best and are merely followed for conformity, convenience and to avoid making waves. 
 
