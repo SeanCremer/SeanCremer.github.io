@@ -3,7 +3,7 @@
 
 Nice read to see how the different products are gaining ground while others are loosing.  Good opportunity to highlight a prodcut you never knew about that could be helpfull.
 
-https://stackshare.io/posts/top-developer-tools-2016
+[Read More ...](https://stackshare.io/posts/top-developer-tools-2016)
 
 Nice one StackShare!
 
