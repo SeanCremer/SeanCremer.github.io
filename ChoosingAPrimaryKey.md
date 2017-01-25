@@ -5,7 +5,7 @@
 1. [Introduction](#introduction)
 2. [Some Fundamental Truths](#fundamentalTruths)
     1. [-What are some of the Gotchas](#gotachs)
-3. [Some Simple Real World Realities](#realities
+3. [Some Simple Real World Realities](#realities)
     1. [-Integers](#integers)
     2. [-Dates](#dates)
     3. [-Strings](#strings)
@@ -46,11 +46,19 @@ Primary key columns can be any of the main SQL data types including strings. Eac
 
 ### Integers
 
+Integers are your friend.  If you are designing a new database you should as best as posible try and make all your Primary Keys integers. Internally under the hood SQL server is able to work with Integers faster than other data types in nearly every implmeted design. They allow for faster joins between tables, improved lookups and smaller Phsycial volume indexes which improves the performnce of the index itself.
+
 <a name="dates"></a>
 
 ### Dates
 
-<a name="strings"></a
+I have unfortunately seen this in production quite often on various systems. Mostly on systems where people have called me to come and help them out with their database performance problems.  In a very simple like for like comparison an Integer is stored in 4 Bytes a DateTime in 8 bytes.  This naturally means you have doubled the size of reading volume for the index by using a date than would have been the case with an Integer. If your system is heavly transaction choosing a DateTime column for a Primary key is usually a done under the misguided belief that it would help out when writing reports that query the system on date ranges.
+
+DateTime fileds are better suited to additional helper Indexes but not the Primary Key.  If you are adamant in your approach to wanting a date range searchable primary key then consider turning it into an Integer representation of the Date.  This can be something similar to interanl storage value whihc actually has very little meaning when visually seen or just make the date 2017-01-01  equal the Integer 20170101.  This will allow you to maintain your search options.  
+
+Still at the very least in my experience it is not a good idea to use date,  I would strongly advise against it if you want a fast system.
+ 
+<a name="strings"></a>
 
 ### Strings
 
