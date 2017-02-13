@@ -159,6 +159,7 @@ BEGIN
 END
 GO
 ```
+
 ### No-Clustered Index Primary Key, Clustered Secondary Index
 
 ```sql
@@ -183,6 +184,7 @@ BEGIN
 END
 GO
 ```
+
 ### Composite Clustered Primary Key, No Secondary Index
 
 ```sql
