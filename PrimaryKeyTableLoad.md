@@ -45,3 +45,5 @@ END
 GO
 
 ```
+
+[Return to Choosing Primary Key Post](ChoosingAPrimaryKey.md)

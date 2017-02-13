@@ -12,11 +12,12 @@
     4. [-GUIDS](#guids)
 4. [What are some of the big Questions](#questions)
     1. [-What is the Purpose of the Table](#purpose)
-    2. [-What are teh Expected Transaction Volumes](#volumes)
+    2. [-What are the Expected Transaction Volumes](#volumes)
 5. [Primary Key Demo](#demo)    
     1. [-Clustered Index Primary Key, Non-Custered Seondary Index](#clustered)
     2. [-No-Clustered Index Primary Key, Clustered Secondary Index](#noclustered)
     3. [-Composite Clustered Primary Key, No Secondary Index](#composite)
+5. [Conclusion](#conclusion)         
 
 <a name="introduction"></a>
 
@@ -102,9 +103,8 @@ OLTP systems have a variety of different table types.
 The main focus on a transacitional table is to ensure that inserts are extremely fast. You are also trying to get as many rows stored on a data page as possible so you should try to not include too many columns. If the columns seem to be getting more and more consider breaking the table apart.
 
 #### Is the Table part of a Warehouse?
-Data warehouses by definition are there for the purpose of reporting and data analysis. In most data warehouses, data retrieval trumps inserts. The choice of primary key should allow for well defined CLustered data lookups and reads that support aggregations of data in the logical representation of how people percieve the data to add value to their organisation. In may cases well planned compositer primary keys allow for good data retrieval of data when needed in specific groupings. It is important t note that the choice of primary key for teh Datawarehouse table can and in most cases, should be different to its original parent table in the OLTP database.  This is in most part because they have different needs with regards to Insert versus retrieval of data. It is important to note that factors such as pre-aggregated tables and report caching tools could also have an impact on whether or not you build your primary keys for insert or retrieval speeds.
-#### Is the Table part of a data Mart?
-Many of the Data Marts that  have seen in the last few years are doubling as the actual data warehouse.  If that is the case in your current infrastructre then the choise of Primary Key should follow the same logical needs of the datawarehouse where data retrieval is prefered over inserts speeds.
+Data warehouses by definition are there for the purpose of reporting and data analysis. In most data warehouses, data retrieval trumps inserts. The choice of primary key should allow for well defined CLustered data lookups and reads that support aggregations of data in the logical representation of how people percieve the data to add value to their organisation. In may cases well planned compositer primary keys allow for good data retrieval of data when needed in specific groupings. It is important t note that the choice of primary key for the Datawarehouse table can and in most cases, should be different to its original parent table in the OLTP database.  This is in most part because they have different needs with regards to Insert versus retrieval of data. It is important to note that factors such as pre-aggregated tables and report caching tools could also have an impact on whether or not you build your primary keys for insert or retrieval speeds.
+#### Is the Table part of a data Mart?Many of the Data Marts that  have seen in the last few years are doubling as the actual data warehouse.  If that is the case in your current infrastructre then the choise of Primary Key should follow the same logical needs of the datawarehouse where data retrieval is prefered over inserts speeds.
 #### Is the table part of a staging process?
 In my experience, staging databases share the needs of both insert and retrieval considerations. How you design is dependant largely on the volume of data that passes throygh the staging area and the amount of Aggregations that you are preparing. What is most important is hat you remember to move the data off the OLTP system into the staging area before begginning any aggregations.  So the initial table might be prepped for insert.  The aggregation query looses retrieval perfromance but then stores th aggragation into a structure designed for a Composite primary key that is good for retriving the data before its movement to a mart or warehose. 
 
@@ -127,15 +127,15 @@ The design logic is prestty simple and not meant to be something special. Intend
 - **Department** Table stores things like Mens, Womans, Kids etc.
 - **SubGroup** Table stores things like TShirts, Shoes, Shorts etc.
 - **DepartmentSubGroup** table stores the mappings of what Sub Groups belong to a department.
-- **DepartmentSubGroupItem** table stores the actual Item associated with the the DEpartment And Sub Group.  Important to note that it is an Identifying relationship in teh example to build a composite key for demo purposes. 
+- **DepartmentSubGroupItem** table stores the actual Item associated with the the DEpartment And Sub Group.  Important to note that it is an Identifying relationship in the example to build a composite key for demo purposes. 
 
-This department mapping is going to be used in Association with the Sales table to identify the item being sold. teh code examples will assume the existance of the above structure and merely focus on teh different options avaialble to the Sales Table. We will be looking at teh following Sale Table design options:
+This department mapping is going to be used in Association with the Sales table to identify the item being sold. the code examples will assume the existance of the above structure and merely focus on the different options avaialble to the Sales Table. We will be looking at the following Sale Table design options:
 
 - Sale Table with a Clustered Integer Primary Key and a secondary non-Clustered index on the Attribute Table DepartmentSubGroupItem.
 - Sale Table with a Non-Clustered Integer Primary Key and a secondary Clustered index on the Attribute Table DepartmentSubGroupItem.
 - Sale Table with the DepartmentSubGroupTable as an Identifying Parent Table creating a composite primary key, no secondary index required.
 
-All teh below table structures were populated with a random 50000 rows.  The script can be found here:
+All the below table structures were populated with a random generated 50 000 rows.  The script can be found here:
 
 [Load Script](PrimaryKeyTableLoad.md)
 
@@ -143,6 +143,7 @@ All teh below table structures were populated with a random 50000 rows.  The scr
 
 ### Clustered Index Primary Key, Non-Custered Seondary Index
 
+The below table create is something that I have unfortunately seen all too often now days. Someone justs slaps in an Identity primary key wihtout really thinking, defaultng it to Clustered, realising at a later point that they need some performance on queries realted to other columns and then slap on a another non clustered index on the relevant columns.
 ```sql
 /*** Create table with IDENTITY column as Clustered Index ***/
 /*** with Non-Clustered Secondary                         **/
@@ -168,10 +169,32 @@ END
 GO
 ```
 
+If we run the following very siplistic code with get QueryPlan on:
+
+```sql
+SELECT * 
+FROM dbo.SaleItemA
+WHERE SaleItemId = 25000;
+
+SELECT DepartmentId, SubGroupId,ItemId, SUM(Quantity) as TotalQuantity
+FROM dbo.SaleItemA
+WHERE DepartmentId = 5
+  AND SubGroupId   = 5
+  AND ItemId       = 5
+GROUP BY DepartmentId, SubGroupId,ItemId;
+```
+
+We get the following:
+
+![Query Plan Clustered](PrimaryKeyPics/QueryPlanClustered.jpg)
+
+The quesry plan shows us expected behaviour.  Looking at a specific value up on the Clustered Primary Key Identity Field produces a good plan.  The aggregation accross the secondary non clustered index results in the expected seek.  On Face value this does not see to be too bad if you do not require a degree of lookups taking place on the fileds in the secondary Index.
+
 <a name="nonclustered"></a>
 
 ### Non-Clustered Index Primary Key, Clustered Secondary Index
 
+This type of option at least shows a little extra thought went into the table design.  The Identity was chosen most likely for simplicity or for quick insert.  The designer however knew that they would need to entertain lookups and therefore cluster the secondary index.
 ```sql
 /*** Create table with IDENTITY column as Non-Clustered Index ***/
 /*** with Clustered Secondary                                 ***/
@@ -196,10 +219,30 @@ BEGIN
 END
 GO
 ```
+Running the same query against this table:
+
+```sql
+SELECT * 
+FROM dbo.SaleItemB
+WHERE SaleItemId = 25000;
+
+SELECT DepartmentId, SubGroupId,ItemId, SUM(Quantity) as TotalQuantity
+FROM dbo.SaleItemB
+WHERE DepartmentId = 5
+  AND SubGroupId   = 5
+  AND ItemId       = 5
+GROUP BY DepartmentId, SubGroupId,ItemId;
+```
+
+![Query Plan Non Clustered](PrimaryKeyPics/QueryPlanNonClustered.png)
+
+The plans show results as expected.  Now that the identity is no longer clustered the simple lookup on the primary key is not as performant as the previous table design.  The aggrergation query on the other hand is now vastly improved as it targets the clustered secondary index.
 
 <a name="composite"></a>
 
 ### Composite Clustered Primary Key, No Secondary Index
+
+Over the years I have become a big fan of composite primary keys that naturally flow from 3rd normal form database design.  Especially if you are not yet sure what the data retrieval and lookup needs are going to actually be for a new system.  Guessing often results in a design that misses the eventual need of the business.  It by its very nature when load starts to increase mitigates hotspotting during inserts.  The previous table designs often get table partitioning added to them to reduce hotspotting when they realise that the Identity is not coping duing insert. Most not realising at the time that they have just built a composite primary key.
 
 ```sql
 /*** Create table with Composite Clustered Index ***/
@@ -219,6 +262,39 @@ BEGIN
 END
 GO
 ```
+
+Running the same query against against the composite Primary Key design:
+
+```sql
+SELECT * 
+FROM dbo.SaleItemC
+WHERE SaleItemId = 25000;
+
+SELECT DepartmentId, SubGroupId,ItemId, SUM(Quantity) as TotalQuantity
+FROM dbo.SaleItemC
+WHERE DepartmentId = 5
+  AND SubGroupId   = 5
+  AND ItemId       = 5
+GROUP BY DepartmentId, SubGroupId,ItemId;
+```
+![Qyery Plan Composite](PrimaryKeyPics/QyeryPlanComposite.png)
+
+In the case of the Composite Primary Key we get good results for the agregation query beecasue of the key being composite.  Direct lookups at the level Identity level are acceptable but would probably be improved if we added a secondary Non Custered Index on it. What is importatnt to not is that out the gate it gives acceptable all round query otions on the data wihtout needing to add additional indexes which in themselves carry overhead. 
+
+<a name="conclusion"></a>
+
+## Conclusion
+
+Do any of the results above explicity show one design option better than another, the answer is NO, not really!  What they do show is that choosing a certain option has an expected consequence in future behaviour of queries against the object.  What does ths mean?  
+
+- Find out what type of data needs to be returned most often from the Table then look at a Primary Key or Secondary Index to matach.
+- What are the expected data volumes and is Hot spotting on insert a potential future problem, then choose accordingly.
+- Try various options.  Populate the table with volume and then simulate its expected load in prodcution. Target the object with various types of expected queries it wil be subjected to in production.  Arm yorself with information before just randomly choosing a simple Primary Key option like an Identity, or a more complex composite Key.
+
+Knowing the expected transactional activity against the object at the very least gives you a fighting chance to choose indexes that will perform well into the future. When that type of knowledge is not freely avaialble; then purely out of my own experience over the years the composite indexes that natrually form during database design often cover most requirements in an acceptable way. Not neccessarily the best in any area but an acceptable average performer.   
+
+What is important to note is that in complex, high transactional systems the design is opften a trade off against what is of greater importance from a speed perspective.  In many case some types of queries just have to draw the short straw and be non performant as just continually slapping on Indexes does not always improve perfromance overall in the long run.
+
 
 ## Disclaimer
 This is my personal blog. The views expressed on these pages are mine alone and not those of my employer.
