@@ -1,4 +1,11 @@
 
+## Introduction to Choosing a Primary Key
+
+Choosing the right Primary Key for a SQL table would seem to the laymen to be a very simple thing to do. In reality there are many things that you need to ask yourself about the data, the design as well as intended use.
+Essentially the Primary key on a table is the mechanism through which SQL searches for the data you are looking for. It has impact on anything you would want to do with the Table; inserting, updating, deleting or just plain joining to the table.
+
+[Read More...](ChoosingAPrimaryKey.md)
+
 ## Top Developer Tools for 2016 (2017-01-25)
 
 Nice read to see how the different products are gaining ground while others are loosing.  Good opportunity to highlight a prodcut you never knew about that could be helpfull.
