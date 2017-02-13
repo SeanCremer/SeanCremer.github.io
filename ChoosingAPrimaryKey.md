@@ -14,9 +14,9 @@
     1. [-What is the Purpose of the Table](#purpose)
     2. [-What are teh Expected Transaction Volumes](#volumes)
 5. [Primary Key Demo](#demo)    
-    1. [-Clustered Index Primary Key, Non-Custered Seondary Index](#requirement)
-    2. [-No-Clustered Index Primary Key, Clustered Secondary Index](#requirement)
-    3. [-Composite Clustered Primary Key, No Secondary Index](#requirement)
+    1. [-Clustered Index Primary Key, Non-Custered Seondary Index](#clustered)
+    2. [-No-Clustered Index Primary Key, Clustered Secondary Index](#noclustered)
+    3. [-Composite Clustered Primary Key, No Secondary Index](#composite)
 
 <a name="introduction"></a>
 
@@ -135,6 +135,12 @@ This department mapping is going to be used in Association with the Sales table 
 - Sale Table with a Non-Clustered Integer Primary Key and a secondary Clustered index on the Attribute Table DepartmentSubGroupItem.
 - Sale Table with the DepartmentSubGroupTable as an Identifying Parent Table creating a composite primary key, no secondary index required.
 
+All teh below table structures were populated with a random 50000 rows.  The script can be found here:
+
+[Load Script](PrimaryKeyTableLoad.md)
+
+<a name="clustered"></a>
+
 ### Clustered Index Primary Key, Non-Custered Seondary Index
 
 ```sql
@@ -152,15 +158,19 @@ BEGIN
     CONSTRAINT pk_SaleItemA PRIMARY KEY CLUSTERED (SaleItemId)
     );
 
-  IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE name = 'ak_DepartmentSubGroupItem_NonClustered')
+  IF NOT EXISTS(SELECT 1 FROM sys.indexes 
+                WHERE name = 'ak_DepartmentSubGroupItem_NonClustered')
   BEGIN
-    CREATE UNIQUE NONCLUSTERED INDEX ak_DepartmentSubGroupItem_NonClustered ON dbo.SaleItemA (DepartmentId, SubGroupId, ItemId); 
+    CREATE NONCLUSTERED INDEX ak_DepartmentSubGroupItem_NonClustered 
+        ON dbo.SaleItemA (DepartmentId, SubGroupId, ItemId); 
   END
 END
 GO
 ```
 
-### No-Clustered Index Primary Key, Clustered Secondary Index
+<a name="nonclustered"></a>
+
+### Non-Clustered Index Primary Key, Clustered Secondary Index
 
 ```sql
 /*** Create table with IDENTITY column as Non-Clustered Index ***/
@@ -177,13 +187,17 @@ BEGIN
     CONSTRAINT pk_SaleItemB PRIMARY KEY NONCLUSTERED (SaleItemId)
     );
 
-  IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE name = 'ak_DepartmentSubGroupItem_Clustered')
+  IF NOT EXISTS(SELECT 1 FROM sys.indexes 
+                WHERE name = 'ak_DepartmentSubGroupItem_Clustered')
   BEGIN
-    CREATE UNIQUE CLUSTERED INDEX ak_DepartmentSubGroupItem_Clustered ON dbo.SaleItemB (DepartmentId, SubGroupId, ItemId); 
+    CREATE CLUSTERED INDEX ak_DepartmentSubGroupItem_Clustered 
+        ON dbo.SaleItemB (DepartmentId, SubGroupId, ItemId); 
   END
 END
 GO
 ```
+
+<a name="composite"></a>
 
 ### Composite Clustered Primary Key, No Secondary Index
 
@@ -197,9 +211,9 @@ BEGIN
     DepartmentId     int NOT NULL,
     SubGroupId       int NOT NULL,
     ItemId           int NOT NULL,
-    SaleItemID       int IDENTITY(1,1),
+    SaleItemId       int IDENTITY(1,1),
     Quantity         int NOT NULL,
-    CONSTRAINT pk_SaleItemC PRIMARY KEY CLUSTERED (DepartmentId, SubGroupId, ItemId)
+    CONSTRAINT pk_SaleItemC PRIMARY KEY CLUSTERED (DepartmentId, SubGroupId, ItemId, SaleItemId)
     );
 
 END
