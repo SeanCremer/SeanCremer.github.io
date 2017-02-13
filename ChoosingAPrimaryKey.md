@@ -13,6 +13,8 @@
 4. [What are some of the big Questions](#questions)
     1. [-What is the Purpose of the Table](#purpose)
     2. [-What are teh Expected Transaction Volumes](#volumes)
+5. [Primary Key Demo](#demo)    
+    1. [-Demo Business Requirements](#requirement)
 
 <a name="introduction"></a>
 
@@ -97,13 +99,26 @@ OLTP systems have a variety of different table types.
 
 The main focus on a transacitional table is to ensure that inserts are extremely fast. You are also trying to get as many rows stored on a data page as possible so you should try to not include too many columns. If the columns seem to be getting more and more consider breaking the table apart.
 
-#### Is the Table part of a Warehouse
+#### Is the Table part of a Warehouse?
 Data warehouses by definition are there for the purpose of reporting and data analysis. In most data warehouses, data retrieval trumps inserts. The choice of primary key should allow for well defined CLustered data lookups and reads that support aggregations of data in the logical representation of how people percieve the data to add value to their organisation. In may cases well planned compositer primary keys allow for good data retrieval of data when needed in specific groupings. It is important t note that the choice of primary key for teh Datawarehouse table can and in most cases, should be different to its original parent table in the OLTP database.  This is in most part because they have different needs with regards to Insert versus retrieval of data. It is important to note that factors such as pre-aggregated tables and report caching tools could also have an impact on whether or not you build your primary keys for insert or retrieval speeds.
-#### Is the Table part of a data Mart
+#### Is the Table part of a data Mart?
 Many of the Data Marts that  have seen in the last few years are doubling as the actual data warehouse.  If that is the case in your current infrastructre then the choise of Primary Key should follow the same logical needs of the datawarehouse where data retrieval is prefered over inserts speeds.
-#### Is the table part of a staging process
+#### Is the table part of a staging process?
 In my experience, staging databases share the needs of both insert and retrieval considerations. How you design is dependant largely on the volume of data that passes throygh the staging area and the amount of Aggregations that you are preparing. What is most important is hat you remember to move the data off the OLTP system into the staging area before begginning any aggregations.  So the initial table might be prepped for insert.  The aggregation query looses retrieval perfromance but then stores th aggragation into a structure designed for a Composite primary key that is good for retriving the data before its movement to a mart or warehose. 
 
+<a name="demo"></a>
+
+## Primary Key Demo
+
+The below demo is extremely simplified but will illustrate the changing behaviour of MSSQL with slightly different approaches to choice of Primary Key and Indexes.  The results are very specific to what I will have built from a design perspective. It is alwyas important that you test your own Table and Primary Key choices as the results will vary in many different ways just like the example.
+
+<a name="requirement"></a>
+
+### Demo Business Requirements
+
+Currently teh organisation has a Product table classification that is set up as follows:
+
+![Example1](https://SeanCremer.github.io/PrimaryKeyPics/DepartmentSubGroupItem.jpg)
 
 ## Disclaimer
 This is my personal blog. The views expressed on these pages are mine alone and not those of my employer.
