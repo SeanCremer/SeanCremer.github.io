@@ -14,7 +14,9 @@
     1. [-What is the Purpose of the Table](#purpose)
     2. [-What are teh Expected Transaction Volumes](#volumes)
 5. [Primary Key Demo](#demo)    
-    1. [-Demo Business Requirements](#requirement)
+    1. [-Clustered Index Primary Key, Non-Custered Seondary Index](#requirement)
+    2. [-No-Clustered Index Primary Key, Clustered Secondary Index](#requirement)
+    3. [-Composite Clustered Primary Key, No Secondary Index](#requirement)
 
 <a name="introduction"></a>
 
@@ -116,9 +118,91 @@ The below demo is extremely simplified but will illustrate the changing behaviou
 
 ### Demo Business Requirements
 
-Currently teh organisation has a Product table classification that is set up as follows:
+Currently the organisation has a Product table classification that is set up as follows:
 
 ![Example1](https://SeanCremer.github.io/PrimaryKeyPics/DepartmentSubGroupItem.jpg)
+
+The design logic is prestty simple and not meant to be something special. Intended use as follows.
+
+- **Department** Table stores things like Mens, Womans, Kids etc.
+- **SubGroup** Table stores things like TShirts, Shoes, Shorts etc.
+- **DepartmentSubGroup** table stores the mappings of what Sub Groups belong to a department.
+- **DepartmentSubGroupItem** table stores the actual Item associated with the the DEpartment And Sub Group.  Important to note that it is an Identifying relationship in teh example to build a composite key for demo purposes. 
+
+This department mapping is going to be used in Association with the Sales table to identify the item being sold. teh code examples will assume the existance of the above structure and merely focus on teh different options avaialble to the Sales Table. We will be looking at teh following Sale Table design options:
+
+- Sale Table with a Clustered Integer Primary Key and a secondary non-Clustered index on the Attribute Table DepartmentSubGroupItem.
+- Sale Table with a Non-Clustered Integer Primary Key and a secondary Clustered index on the Attribute Table DepartmentSubGroupItem.
+- Sale Table with the DepartmentSubGroupTable as an Identifying Parent Table creating a composite primary key, no secondary index required.
+
+### Clustered Index Primary Key, Non-Custered Seondary Index
+
+```sql
+/*** Create table with IDENTITY column as Clustered Index ***/
+/*** with Non-Clustered Secondary                         **/
+
+IF (OBJECT_ID('dbo.SaleItemA', 'U') IS NULL)
+BEGIN    
+  CREATE TABLE dbo.SaleItemA(
+    SaleItemId       int IDENTITY(1,1),
+    DepartmentId     int NOT NULL,
+    SubGroupId       int NOT NULL,
+    ItemId           int NOT NULL,
+    Quantity         int NOT NULL,
+    CONSTRAINT pk_SaleItemA PRIMARY KEY CLUSTERED (SaleItemId)
+    );
+
+  IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE name = 'ak_DepartmentSubGroupItem_NonClustered')
+  BEGIN
+    CREATE UNIQUE NONCLUSTERED INDEX ak_DepartmentSubGroupItem_NonClustered ON dbo.SaleItemA (DepartmentId, SubGroupId, ItemId); 
+  END
+END
+GO
+```
+### No-Clustered Index Primary Key, Clustered Secondary Index
+
+```sql
+/*** Create table with IDENTITY column as Non-Clustered Index ***/
+/*** with Clustered Secondary                                 ***/
+
+IF (OBJECT_ID('dbo.SaleItemB', 'U') IS NULL)
+BEGIN    
+  CREATE TABLE dbo.SaleItemB(
+    SaleItemId       int IDENTITY(1,1),
+    DepartmentId     int NOT NULL,
+    SubGroupId       int NOT NULL,
+    ItemId           int NOT NULL,
+    Quantity         int NOT NULL,
+    CONSTRAINT pk_SaleItemB PRIMARY KEY NONCLUSTERED (SaleItemId)
+    );
+
+  IF NOT EXISTS(SELECT 1 FROM sys.indexes WHERE name = 'ak_DepartmentSubGroupItem_Clustered')
+  BEGIN
+    CREATE UNIQUE CLUSTERED INDEX ak_DepartmentSubGroupItem_Clustered ON dbo.SaleItemB (DepartmentId, SubGroupId, ItemId); 
+  END
+END
+GO
+```
+### Composite Clustered Primary Key, No Secondary Index
+
+```sql
+/*** Create table with Composite Clustered Index ***/
+/*** with no Secondary                           ***/
+
+IF (OBJECT_ID('dbo.SaleItemC', 'U') IS NULL)
+BEGIN    
+  CREATE TABLE dbo.SaleItemC(
+    DepartmentId     int NOT NULL,
+    SubGroupId       int NOT NULL,
+    ItemId           int NOT NULL,
+    SaleItemID       int IDENTITY(1,1),
+    Quantity         int NOT NULL,
+    CONSTRAINT pk_SaleItemC PRIMARY KEY CLUSTERED (DepartmentId, SubGroupId, ItemId)
+    );
+
+END
+GO
+```
 
 ## Disclaimer
 This is my personal blog. The views expressed on these pages are mine alone and not those of my employer.
