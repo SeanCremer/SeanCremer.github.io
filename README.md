@@ -3,7 +3,7 @@
 
 Niels Berglund is a colleague of mine as well as the gent that he was arguing with in his post, namely Sameer Chunilall.  I regard both as some of the best people to go to when you need to know something about SQL Server. 
 
-On the Topic of **XACT_ABORT ON**, my feelings tend to flow in the same direction as Niels.  Not to say that I don't think going down the road of building a completely new database planned around the use of XACT_ABORT is a bad thing.  In that circumstance where you control your complete call stack and understand the implications it can be used for good rather than evil. However in a very old system with decadeds of SQL code using every potential form of error handling and when procedures call down into each other in the double figure count; adding a random **XACT_ABORT ON** can cause more problems than what you arte trying to solve.
+On the Topic of **XACT_ABORT ON**, my feelings tend to flow in the same direction as Niels.  Not to say that I don't think going down the road of building a completely new database planned around the use of XACT_ABORT is a bad thing.  In that circumstance where you control your complete call stack and understand the implications it can be used for good rather than evil. However in a very old system with decadeds of SQL code using every potential form of error handling and when procedures call down into each other in the double figure count; adding a random **XACT_ABORT ON** can cause more problems than what you were trying to solve.
 
 Despite all of that the link below is to one of my favourite blog posts by Niles about doomed transactions, well worth a read!!
 
