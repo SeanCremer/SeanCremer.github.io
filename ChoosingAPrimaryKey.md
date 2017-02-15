@@ -33,7 +33,7 @@ For more information on the principals of Databse design you can refer to a prev
 
 ## Some Fundamental Truths
 
-There are some rules that govern creating primmary key values on SQL server tables.  These rules are based around the reality that a Primary Key is in actual fact a constraint
+There are some rules that govern creating primmary key values on SQL server tables.  These rules are based around the reality that a Primary Key is in actual fact a constraint that acts like an index.
 
 
 <a name="gotachs"></a>
