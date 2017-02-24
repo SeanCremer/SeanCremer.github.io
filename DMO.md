@@ -42,10 +42,10 @@ As time has marched on in MSSQL and it versions so has teh avaialbility of DMO's
 -- Produce a list of available Dynamic Management Views and Functions
 
 SELECT  name ,         
-		    CASE type           
-		      WHEN 'V' THEN 'DMV'           
-		      WHEN 'IF' THEN 'DMF'         
-		    END AS DMO_Type
+        CASE type           
+          WHEN 'V' THEN 'DMV'           
+          WHEN 'IF' THEN 'DMF'         
+        END AS DMO_Type
 FROM master.sys.sysobjects
 WHERE name LIKE 'dm_%' 
 ORDER BY name;
