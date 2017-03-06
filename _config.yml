@@ -1,3 +1,4 @@
 theme: jekyll-theme-architect
-gems:
-  - jekyll-feed
+url: https://seancremer.github.io  
+author: Sean Cremer
+feed: /atom.xml
