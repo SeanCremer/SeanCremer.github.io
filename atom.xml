@@ -6,7 +6,7 @@
 	<subtitle>Latest </subtitle>
 	<link href="https://seancremer.github.io" rel="self" />
 	<link href="https://seancremer.github.io" />
-	<id>urn:uuid:60a76c80-d399-11d9-b91C-0003939e0af5</id>
+	<id>urn:uuid:60a76c80-d399-11d9-b91C-0003939e0af7</id>
 	<updated>2017-03-06T14:34:02Z</updated>
 	
 	
@@ -16,12 +16,12 @@
 		<link href="https://seancremer.github.io" />
 		<link rel="alternate" type="text/html" href="https://seancremer.github.io"/>
 		<link rel="edit" href="https://seancremer.github.io"/>
-		<id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa5a</id>
+		<id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa7a</id>
 		<updated>2017-03-06T14:34:02Z</updated>
 		<summary>This is a test Feed</summary>
 		<content type="xhtml">
 			<div xmlns="http://www.w3.org/1999/xhtml">
-				<p>Doomed, We Are all Doomed, by Niels Berglund</p>
+				<p>Doomed, We Are all Doomed, by Niels Berglund, Second Test</p>
 			</div>
 		</content>
 		<author>
