@@ -6,8 +6,8 @@
 	<subtitle>Latest </subtitle>
 	<link href="https://seancremer.github.io" rel="self" />
 	<link href="https://seancremer.github.io" />
-	<id>urn:uuid:60a76c80-d399-11d9-b91C-0003939e0af6</id>
-	<updated>2003-12-13T18:30:02Z</updated>
+	<id>urn:uuid:60a76c80-d399-11d9-b91C-0003939e0af5</id>
+	<updated>2017-03-06T14:34:02Z</updated>
 	
 	
 	<entry>
@@ -16,8 +16,8 @@
 		<link href="https://seancremer.github.io" />
 		<link rel="alternate" type="text/html" href="https://seancremer.github.io"/>
 		<link rel="edit" href="https://seancremer.github.io"/>
-		<id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
-		<updated>2017-03-06T18:30:02Z</updated>
+		<id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa5a</id>
+		<updated>2017-03-06T14:34:02Z</updated>
 		<summary>This is a test Feed</summary>
 		<content type="xhtml">
 			<div xmlns="http://www.w3.org/1999/xhtml">
